@@ -1,0 +1,104 @@
+# Cílem tohoto projektu bylo vytvořit jednoduchý slovník, který by obsahovat detaily o různých filmech.
+
+# Vstupní proměnné
+oddelovac = "=" * 62
+uzivatele = {"tomas", "petr", "marek"}
+sluzby = ("dostupne filmy", "detaily filmu", "reziseri")
+
+film_1 = {
+    "JMENO": "Shawshank Redemption",
+    "HODNOCENI": "93/100",
+    "ROK": 1994,
+    "REZISER": "Frank Darabont",
+    "STOPAZ": 144,
+    "HRAJI": ("Tim Robbins", "Morgan Freeman", "Bob Gunton", "William Sadler",
+      "Clancy Brown", "Gil Bellows", "Mark Rolston", "James Whitmore",
+      "Jeffrey DeMunn", "Larry Brandenburg"
+    )
+}
+
+film_2 = {
+    "JMENO": "The Godfather",
+    "HODNOCENI": "92/100",
+    "ROK": 1972,
+    "REZISER": "Francis Ford Coppola",
+    "STOPAZ": 175,
+    "HRAJI": ("Marlon Brando", "Al Pacino", "James Caan",
+      "Richard S. Castellano", "Robert Duvall", "Sterling Hayden",
+      "John Marley", "Richard Conte"
+    )
+}
+
+film_3 = {
+    "JMENO": "The Dark Knight",
+    "HODNOCENI": "90/100",
+    "ROK": 2008,
+    "REZISER": "Christopher Nolan",
+    "STOPAZ": 152,
+    "HRAJI": ("Christian Bale", "Heath Ledger", "Aaron Eckhart",
+      "Michael Caine", "Maggie Gyllenhaal", "Gary Oldman", "Morgan Freeman",
+      "Monique Gabriela", "Ron Dean", "Cillian Murphy"
+    )
+}
+
+film_4 = {
+    "JMENO": "The Prestige",
+    "HODNOCENI": "85/100",
+    "ROK": 2006,
+    "REZISER": "Christopher Nolan",
+    "STOPAZ": 130,
+    "HRAJI": ("Hugh Jackman", "Christian Bale", "Michael Caine",
+      "Piper Perabo", "Rebecca Hall", "Scarlett Johansson", "Samantha Mahurin",
+      "David Bowie"
+    )
+}
+
+# Společný slovník 'filmy'
+filmy = {}
+filmy.update({film_1["JMENO"]:film_1})
+filmy.update({film_2["JMENO"]:film_2})
+filmy.update({film_3["JMENO"]:film_3})
+filmy.update({film_4["JMENO"]:film_4})
+
+
+# Přihlášení, uvítání, nabídka
+jmeno = input("Zadej jméno: ")
+
+if not jmeno in uzivatele:
+    print("Uživatel neexistuje. Není možné pokračovat. :(")
+    exit()
+else:
+    print(oddelovac)
+    print("Vítejte v našem filmovém slovníku!".upper().center(62))
+    print(oddelovac)
+
+sluzby_string = " | ".join(sluzby)
+print(("| " + sluzby_string + " |").center(62))
+print(oddelovac)
+
+# Umožnit výběr ze služeb, výpis všech filmů a ukončení
+vyber_sluzbu = input("Vyber službu: ")
+
+if vyber_sluzbu == "dostupne filmy":
+    print("DOSTUPNE FILMY:")
+    print(", ".join(filmy.keys()))
+    exit()
+elif vyber_sluzbu == "detaily filmu":
+    print("DOSTUPNE FILMY:")
+    print(", ".join(filmy.keys()))
+    klice = list(filmy.keys())
+    vybrany_klic = input("Vyber film: ")
+    print(oddelovac)
+    if vybrany_klic in filmy:
+        hodnota = filmy[vybrany_klic]
+        print("FILM: ", vybrany_klic)
+    else:
+        print("Takový film není ve slovníku!")
+    print(hodnota)
+elif vyber_sluzbu == "reziseri":
+    reziseri = [film.get("REZISER") for film in filmy.values()]
+    print("Režiséři: ", ", ".join(reziseri))
+else:
+    print("Vybraná služba není v nabídce, není možné pokračovat.")
+    exit()
+
